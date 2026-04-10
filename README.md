@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 MindSprint
 
-## Getting Started
+MindSprint is a productivity web app designed to help users manage tasks, stay focused, and build consistency.
 
-First, run the development server:
+🔗 **Live App:** https://mind-sprint-sandy.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 📝 Task & Todo Management  
+- 🎯 Focus Mode  
+- 📊 Dashboard & Insights  
+- ⭐ Feedback System  
+- 👤 User Authentication (Supabase)  
+- 🌙 Dark Mode Support  
+- 🤖 AI Engine Integration  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend:** Next.js (App Router), React, Tailwind CSS  
+- **Backend:** Supabase (Authentication + Database)  
+- **Deployment:** Vercel  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔐 Authentication
 
-## Deploy on Vercel
+- Secure login & signup using Supabase  
+- Protected routes with session-based access  
+- Automatic redirection for unauthorized users  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Getting Started (Local Setup)
+
+### 1. Clone the repository
+
+    git clone https://github.com/Syeda-Sameera-Unnissa/MindSprint.git
+    cd MindSprint
+
+### 2. Install dependencies
+
+    npm install
+
+### 3. Run the app
+
+    npm run dev
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env.local` file in the root folder and add:
+
+    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+---
+
+## 📌 Future Improvements
+
+- 🔐 Role-based access (Admin/User)  
+- 🔔 Notifications & task reminders  
+- 📱 Mobile app version  
+- 📊 Advanced analytics & insights  
+
+---
+
+## 👩‍💻 Author
+
+**Sameera**
+
+- 🔗 LinkedIn: https://www.linkedin.com/in/syeda-sameera  
+- 💻 GitHub: https://github.com/Syeda-Sameera-Unnissa  
+
+---
+
+## 🌟 Acknowledgements
+
+Built as part of a learning journey into full-stack development, automation, and real-world application deployment.
+
+---
+
+## 💡 Project Highlights
+
+- Built a **full-stack production-ready app**
+- Implemented **authentication & protected routing**
+- Solved real-world issues like **auth flicker & deployment bugs**
+- Deployed live using Vercel
+
+---
+
+⭐ If you like this project, consider giving it a star!
