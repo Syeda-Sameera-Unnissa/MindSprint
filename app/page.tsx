@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -14,15 +15,27 @@ export default function Home() {
       } = await supabase.auth.getUser();
 
       if (!user) {
-        router.push("/login"); // 🔥 redirect immediately
+        router.replace("/login"); // 👈 better than push
+      } else {
+        setLoading(false);
       }
     };
 
     checkUser();
   }, []);
 
+  // ✅ Prevent UI flash
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center min-h-full">
+
       <div className="relative p-[1px] rounded-2xl 
         bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20
         hover:scale-[1.03] hover:-translate-y-1 transition">
