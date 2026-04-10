@@ -1,31 +1,32 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
   const router = useRouter();
 
-  const handleStart = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+  useEffect(() => {
+    const checkUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-    if (user) {
-      router.push("/todo"); // logged in
-    } else {
-      router.push("/login"); // not logged in
-    }
-  };
+      if (!user) {
+        router.push("/login"); // 🔥 redirect immediately
+      }
+    };
+
+    checkUser();
+  }, []);
 
   return (
     <div className="flex items-center justify-center min-h-full">
-
       <div className="relative p-[1px] rounded-2xl 
         bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20
         hover:scale-[1.03] hover:-translate-y-1 transition">
 
-        {/* Glow */}
         <div className="absolute inset-0 blur-xl opacity-0 
           bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
           hover:opacity-20 transition"></div>
@@ -46,7 +47,7 @@ export default function Home() {
           </p>
 
           <button
-            onClick={handleStart} // ✅ changed here
+            onClick={() => router.push("/todo")}
             className="w-full p-3 rounded-xl 
             bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30
             border border-white/10
