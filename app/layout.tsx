@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import AIEngine from "@/components/AIEngine";
 import { Toaster } from "react-hot-toast";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function RootLayout({
   children,
@@ -13,11 +14,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [darkMode, setDarkMode] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true); // 🔥 NEW
   const pathname = usePathname();
+  const router = useRouter();
 
   const hideSidebarRoutes = ["/login", "/register", "/forgot-password", "/reset-password"];
   const shouldHideSidebar = hideSidebarRoutes.includes(pathname);
 
+  // 🔥 AUTH CHECK (MAIN FIX)
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session && !hideSidebarRoutes.includes(pathname)) {
+        router.replace("/login");
+      }
+
+      setCheckingAuth(false);
+    };
+
+    checkSession();
+  }, [pathname]);
+
+  // 🌙 Theme logic (same as before)
   useEffect(() => {
     const saved = localStorage.getItem("theme");
     if (saved === "dark") {
@@ -35,6 +54,9 @@ export default function RootLayout({
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
+
+  // 🔥 BLOCK ENTIRE UI until auth is checked
+  if (checkingAuth) return null;
 
   return (
     <html lang="en">
@@ -61,15 +83,15 @@ export default function RootLayout({
 
             <div className="py-1 text-center text-sm text-gray-400">
               © 2026 MindSprint • Built by Sameera •{" "}
-            <a
-              href="https://www.linkedin.com/in/syeda-sameera"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition"
-            >
-            LinkedIn
-            </a>
-          </div>
+              <a
+                href="https://www.linkedin.com/in/syeda-sameera"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition"
+              >
+                LinkedIn
+              </a>
+            </div>
 
           </div>
         </div>
