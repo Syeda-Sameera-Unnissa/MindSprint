@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-main: #0B0F1A;
+  --text-main: #E5E7EB;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Buttons (FIXED POSITION) */
+.btn-blue { @apply px-3 py-1 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200; }
+.btn-yellow { @apply px-3 py-1 rounded-lg bg-yellow-100 text-yellow-700 hover:bg-yellow-200; }
+.btn-green { @apply px-3 py-1 rounded-lg bg-green-500 text-white hover:bg-green-600; }
+.btn-purple { @apply px-3 py-1 rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200; }
+.btn-red { @apply px-3 py-1 rounded-lg bg-red-100 text-red-600 hover:bg-red-200; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-main);
+  color: var(--text-main);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Fix datetime picker icon visibility */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+input[type="datetime-local"] {
+  color-scheme: dark;
+}
+
+.btn {
+  @apply px-3 py-1 rounded-lg 
+  bg-gradient-to-r from-blue-500/20 to-purple-500/20
+  text-blue-300 
+  hover:from-blue-500/30 hover:to-purple-500/30
+  hover:scale-105 hover:-translate-y-[1px]
+  transition-all duration-200;
+}
+
+.btn-danger {
+  @apply px-3 py-1 rounded-lg 
+  bg-gradient-to-r from-red-500/20 to-pink-500/20
+  text-red-300
+  hover:from-red-500/30 hover:to-pink-500/30
+  hover:scale-105 hover:-translate-y-[1px]
+  transition-all duration-200;
+}
+
+.btn-success {
+  @apply px-3 py-1 rounded-lg 
+  bg-gradient-to-r from-green-500/20 to-emerald-500/20
+  text-green-300
+  hover:from-green-500/30 hover:to-emerald-500/30
+  hover:scale-105 hover:-translate-y-[1px]
+  transition-all duration-200;
 }
