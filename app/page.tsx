@@ -1,9 +1,22 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
   const router = useRouter();
+
+  const handleStart = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      router.push("/todo"); // logged in
+    } else {
+      router.push("/login"); // not logged in
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-full">
@@ -33,7 +46,7 @@ export default function Home() {
           </p>
 
           <button
-            onClick={() => router.push("/todo")}
+            onClick={handleStart} // ✅ changed here
             className="w-full p-3 rounded-xl 
             bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30
             border border-white/10
